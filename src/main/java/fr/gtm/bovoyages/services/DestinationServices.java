@@ -39,4 +39,8 @@ public class DestinationServices {
 		return dao.getDatesVoyageByDestinationId(id);
 	}
 	
+	public void deleteDatesVoyageByID(long id) {
+		dao.deleteDatesVoyageByID(id);
+	}
+	
 }

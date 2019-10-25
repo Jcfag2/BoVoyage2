@@ -37,4 +37,14 @@ public Set<DatesVoyage> getDatesVoyageByDestinationId(long id){
 	return datesVoyage;
 }
 
+public void deleteDatesVoyageByID(long id) {
+	EntityManager em = emf.createEntityManager();
+	em.getTransaction().begin();
+	DatesVoyage datesVoyage = em.find(DatesVoyage.class, id);
+	em.remove(datesVoyage);
+	em.getTransaction().commit();
+	em.close();	
+}
+
+
 }

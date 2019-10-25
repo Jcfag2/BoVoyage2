@@ -25,6 +25,10 @@ public class SupprimerDestinationServlet extends HttpServlet {
 		String page = "";
 		
 		Long id = Long.valueOf(request.getParameter("id"));
+		service.getDatesVoyageByDestinationId(id);
+//		service.d
+//		d.setDates(null);
+//		service.update(d);
 		service.delete(id);
 		
 		List<Destination> destinations = service.getAllDestinations();
