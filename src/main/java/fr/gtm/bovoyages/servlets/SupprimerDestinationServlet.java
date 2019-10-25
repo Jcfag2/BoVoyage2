@@ -1,7 +1,9 @@
 package fr.gtm.bovoyages.servlets;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.gtm.bovoyages.entities.DatesVoyage;
 import fr.gtm.bovoyages.entities.Destination;
 import fr.gtm.bovoyages.services.DestinationServices;
 
@@ -25,10 +29,17 @@ public class SupprimerDestinationServlet extends HttpServlet {
 		String page = "";
 		
 		Long id = Long.valueOf(request.getParameter("id"));
-		service.getDatesVoyageByDestinationId(id);
-//		service.d
-//		d.setDates(null);
-//		service.update(d);
+		Set<DatesVoyage> datesVoyage = service.getDatesVoyageByDestinationId(id);
+		DatesVoyage date = new DatesVoyage();
+		
+		Iterator<DatesVoyage> iter = datesVoyage.iterator();
+		while (iter.hasNext()) {
+			date = iter.next();
+			service.deleteDatesVoyageByID(date.getId());
+			iter.remove();
+					    }
+		
+		service.findById(id).setDates(datesVoyage);
 		service.delete(id);
 		
 		List<Destination> destinations = service.getAllDestinations();

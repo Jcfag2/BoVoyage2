@@ -51,12 +51,6 @@ public class CreerDateServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			
-			
-			
-		
-	
-			//Date dateRetour = formater.parse(dateRetourTemp);
 			dates.setDateDepart(dateDepart);
 			dates.setDateRetour(dateRetour);
 			dates.setPrixHT(prixHT2);
