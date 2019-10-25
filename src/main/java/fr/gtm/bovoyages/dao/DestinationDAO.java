@@ -46,5 +46,4 @@ public void deleteDatesVoyageByID(long id) {
 	em.close();	
 }
 
-
 }

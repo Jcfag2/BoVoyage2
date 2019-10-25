@@ -46,8 +46,9 @@ public class DestinationServices {
 		dao.deleteDatesVoyageByID(id);
 	}
 	
-	public void deletedate(long id) {
-		dao2.delete(id);	
-		}
+	public DatesVoyage findDateById(long id){
+		return dao2.findById(id);
+	}
+	
 	
 }

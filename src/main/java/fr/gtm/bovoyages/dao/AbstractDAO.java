@@ -1,5 +1,6 @@
 package fr.gtm.bovoyages.dao;
 
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -13,7 +14,8 @@ import javax.persistence.EntityManagerFactory;
 public abstract class AbstractDAO<E,ID> {
 	private EntityManagerFactory emf;
 	private Class<E> entityClass;
-
+	private static final Logger LOG = Logger.getLogger(AbstractDAO.class.getName());
+	
 	protected AbstractDAO(EntityManagerFactory emf,Class<E> entityClass) {
 		this.entityClass = entityClass;
 		this.emf = emf;
@@ -50,8 +52,11 @@ public abstract class AbstractDAO<E,ID> {
 	public void update(E entity) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
+		LOG.info("entité mise à jour1");
 		em.merge(entity);
+		LOG.info("entité mise à jour2");
 		em.getTransaction().commit();
+		LOG.info("entité mise à jour3");
 		em.close();	
 	}
 
