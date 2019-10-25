@@ -13,7 +13,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="index.jsp">Bovoyage</span></a>
+  <a class="navbar-brand" href="index.jsp">Bovoyage</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -24,7 +24,7 @@
         <a class="nav-link" href="DestinationServlet">Destinations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="creerdestination.jsp">Créer une destination <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="creerdestination.jsp">Créer une destination</a>
       </li>
 
     </ul>
@@ -47,7 +47,7 @@
 <br>
 </div>
 <div class="form-group">
-<label for="prixHT">Prix HT</label><input type="text" name="prixHT"  min="0" id="prixHT" class="champ_non_vide  form-control"  placeholder="prix Hors Taxe">
+<label for="prixHT">Prix HT</label><input type="text" name="prixHT"  min="0" id="prixHT" class="champ_non_vide form-control"  placeholder="prix Hors Taxe">
 <span id="error_prixHT" style="visibility: hidden ; color: red">Attention votre prix est incorrect !</span>
 <br>
 </div>
@@ -57,20 +57,21 @@
 <br>
 </div>
 <button type="submit">Créer les dates</button>
-
+<br><br>
 </form>
 
 <h2>Dates pour la destination ${destination.region } :</h2>
-<table class="table table-striped">
+<table class="table">
 <c:forEach items="${dateVoyage }" var="dateVoyage">
-		<tr><td>Date n°${dateVoyage.id }</td></tr>
-		<tr><td>Date de départ:${dateVoyage.dateDepart }</td></tr>
-		<tr><td>Date de retour:${dateVoyage.dateRetour }</td></tr>
-		<tr><td>Prix hors taxes:${dateVoyage.prixHT }</td></tr>
-		<tr><td>Nombre de places dispo:${dateVoyage.nbPlaces }</td></tr>
+
+		<tr><td style="background-color: rgba(20,20,210,0.3); font-weight: bold; font-size: 1.1em">Date n°${dateVoyage.id }</td></tr>
+		<tr><td>Date de départ : ${dateVoyage.dateDepart }</td></tr>
+		<tr><td>Date de retour : ${dateVoyage.dateRetour }</td></tr>
+		<tr><td>Prix hors taxes : ${dateVoyage.prixHT }</td></tr>
+		<tr><td>Nombre de places dispo : ${dateVoyage.nbPlaces }</td></tr>
 		<tr><td><a href="SupprimerDateServlet?id=${dateVoyage.id }&id2=${destination.id }">(Supprimer)</a></td></tr>
 		<tr><td><a href="ModifierDateServlet?id=${dateVoyage.id }&id2=${destination.id }">(Modifier)</a></td></tr>
-		<tr> </tr><tr> </tr><tr> </tr><tr> </tr><tr> </tr><tr> </tr>
+		<tr style="height:80px;"><td></td></tr>
 		</c:forEach>
 </table>
 <br>
