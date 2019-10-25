@@ -28,26 +28,12 @@ public class SupprimerDateServlet extends HttpServlet {
 		
 		Long id = Long.valueOf(request.getParameter("id"));
 		Long id2 = Long.valueOf(request.getParameter("id2"));
-		Destination destination = service.findById(id2);
-		Set<DatesVoyage> datesVoyage = service.getDatesVoyageByDestinationId(id2);
 		
-//		for(DatesVoyage d : datesVoyage) {
-//			if(d.getId()==id) {
-//				datesVoyage.remove(d);
-//			}
-//		}
-		
-		Iterator<DatesVoyage> iter = datesVoyage.iterator();
-		while (iter.hasNext()) {
-		    if(iter.next().getId()==id) {
-		        iter.remove();
-		    }
-		}
-		
-		destination.setDates(datesVoyage);
-		service.update(destination);
+		service.deleteDatesVoyageByID(id);
 		
 		Set<DatesVoyage> dateVoyage = (Set<DatesVoyage>)service.getDatesVoyageByDestinationId(id2);
+		Destination destination = service.findById(id2);
+		
 		request.setAttribute("destination", destination);
 		request.setAttribute("dateVoyage", dateVoyage);
 		

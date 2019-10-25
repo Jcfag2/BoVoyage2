@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
+
+import fr.gtm.bovoyages.dao.DatesVoyageDAO;
 import fr.gtm.bovoyages.dao.DestinationDAO;
 import fr.gtm.bovoyages.entities.DatesVoyage;
 import fr.gtm.bovoyages.entities.Destination;
 
 public class DestinationServices {
 	private DestinationDAO dao;
+	private DatesVoyageDAO dao2;
 	
 	public DestinationServices(EntityManagerFactory emf) {
 		dao = new DestinationDAO(emf);
@@ -38,5 +41,13 @@ public class DestinationServices {
 	public Set<DatesVoyage> getDatesVoyageByDestinationId(long id){
 		return dao.getDatesVoyageByDestinationId(id);
 	}
+	
+	public void deleteDatesVoyageByID(long id) {
+		dao.deleteDatesVoyageByID(id);
+	}
+	
+	public void deletedate(long id) {
+		dao2.delete(id);	
+		}
 	
 }
