@@ -2,10 +2,12 @@ package fr.gtm.bovoyages.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-//import javax.persistence.ElementCollection;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,12 +31,11 @@ public class Destination implements Serializable {
 private long id;
 private String region;
 private String description;
-//@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-////@ElementCollection
-//@JoinColumn(name="fk_destination")
-//private Set<String> images = new HashSet<>();
+@ElementCollection(fetch = FetchType.EAGER)
+@CollectionTable(name="images",joinColumns=@JoinColumn(name="fk_destination"))
+@Column(name="image")
+private List<String> images;
 @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-//@ElementCollection
 @JoinColumn(name="fk_destination")
 private Set<DatesVoyage> dates = new HashSet<>();
 private int deleted;
@@ -64,14 +65,14 @@ public void setDescription(String description) {
 }
 
 
-//public Set<String> getImages() {
-//	return images;
-//}
-//
-//
-//public void setImages(Set<String> images) {
-//	this.images = images;
-//}
+public List<String> getImages() {
+	return images;
+}
+
+
+public void setImages(List<String> images) {
+	this.images = images;
+}
 
 
 public Set<DatesVoyage> getDates() {
@@ -105,9 +106,10 @@ public int hashCode() {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((dates == null) ? 0 : dates.hashCode());
+	result = prime * result + deleted;
 	result = prime * result + ((description == null) ? 0 : description.hashCode());
 	result = prime * result + (int) (id ^ (id >>> 32));
-//	result = prime * result + ((images == null) ? 0 : images.hashCode());
+	result = prime * result + ((images == null) ? 0 : images.hashCode());
 	result = prime * result + ((region == null) ? 0 : region.hashCode());
 	return result;
 }
@@ -127,6 +129,8 @@ public boolean equals(Object obj) {
 			return false;
 	} else if (!dates.equals(other.dates))
 		return false;
+	if (deleted != other.deleted)
+		return false;
 	if (description == null) {
 		if (other.description != null)
 			return false;
@@ -134,11 +138,11 @@ public boolean equals(Object obj) {
 		return false;
 	if (id != other.id)
 		return false;
-//	if (images == null) {
-//		if (other.images != null)
-//			return false;
-//	} else if (!images.equals(other.images))
-//		return false;
+	if (images == null) {
+		if (other.images != null)
+			return false;
+	} else if (!images.equals(other.images))
+		return false;
 	if (region == null) {
 		if (other.region != null)
 			return false;
@@ -146,6 +150,9 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
+
+
+
 
 
 
